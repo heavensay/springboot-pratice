@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("hello")
+@RequestMapping("autoconfig")
 public class HelloController {
 
     @Value("${custom.msg}")
@@ -36,7 +36,7 @@ public class HelloController {
      */
     @RequestMapping("/triggerEvent")
     @ResponseBody
-    public String triggerEvent(@RequestParam(value = "message",required = false) String message){
+    public String autoconfig(@RequestParam(value = "message",required = false) String message){
         helloEventPublisher.publishEvent(message);
         return "trigger ok";
     }
