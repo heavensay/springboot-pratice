@@ -16,3 +16,6 @@
 1增加了spring.profiles.active属性，用以应对不同环境(生产、测试)使用不同配置文件;注意优先级
 2增加@EventListener特性，集成spring事件注册、发送功能
 3增加时间加强特性，利用Autoconfigure特性；time-enhance模块；访问 http://127.0.0.1:8080/spt/autoconfig/time
+4validation：支持aop表达式来匹配需要validation功能的类，以取代spring默认针对@Validated标注的类启用validation功能；
+具体见MethodValidationMatchExpressPostProcessor类
+5aop：aop功能简单使用RequestLogInterceptor
