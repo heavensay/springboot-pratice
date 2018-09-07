@@ -16,13 +16,18 @@
  -->
 <configuration debug="true">
 
+    <property name="APP_NAME" value="SPT"/>
+
+    <contextName>${APP_NAME}</contextName>
     <!--定义日志文件的存储地址 -->
     <property name="LOG_PATH" value="../logs"/>
     <!--<property name="LOG_PATH" value="../logs"/>-->
     <property name="CHARSET" value="UTF-8"/>
+    <!--%date日期 %level日志级别 [%thread]当前线程 %logger{50}输出日志的类，50代表包名加类名的总长度限制 [%file:%line]日志所在文件及行数 %msg%n消息及换行 -->
     <property name="LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%file:%line] %logger{80} %msg%n"/>
+              value="[%-5level] [%contextName] [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%X{req.remoteHost}] [%X{req.requestURI}] [%X{traceId}] [%file:%line] [%msg]%n"/>
 
+    <!--[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level [%thread] [%file:%line] [%logger{80}] %msg%n[%-5level] [%contextName] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{req.remoteHost}] [%X{req.requestURI}] [%X{traceId}] %logger - %msg%n-->
     <!-- ================================================================================= -->
     <!-- 日志appender配置-->
     <!-- ================================================================================= -->
@@ -39,7 +44,7 @@
     <!-- 日志文件输出 -->
     <appender name="FILEOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文件的路径及文件名 -->
-        <file>${LOG_PATH}/catalina.log</file>
+        <file>${LOG_PATH}/springboot-pratice.log</file>
         <!-- 日志文件的格式 -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${LOG_PATTERN}</pattern>
@@ -60,7 +65,7 @@
         <append>true</append>
         <!-- 此日志文件只记录debug级别的 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
+            <level>DEBUG</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>ACCEPT</onMismatch>
         </filter>
@@ -72,7 +77,7 @@
     <!-- ================================================================================= -->
 
     <root level="DEBUG">
-        <!--<appender-ref ref="FILEOUT"/>-->
+        <appender-ref ref="FILEOUT"/>
 
         <!-- 生产环境请将stdout去掉 -->
         <appender-ref ref="STDOUT"/>
