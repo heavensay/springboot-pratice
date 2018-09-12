@@ -71,6 +71,34 @@
         </filter>
     </appender>
 
+    <!-- logstash数据格式定义json格式 -->
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!-- logstash服务接受host和port -->
+        <destination>localhost:4560</destination>
+        <!--{ "level": "%level" , "message" : "%logger | %message %exception" }}-->
+        <encoder  charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "log_level": "%-5level",
+                        "context_name": "%contextName",
+                        "log_date": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+                        "thread_name": "%thread",
+                        "req_host": "%X{req.remoteHost}",
+                        "reques_uri": "%X{req.requestURI}",
+                        "trace_id": "%X{traceId}",
+                        "log_path_line": "%file:%line",
+                        "stack_trace":"%exception",
+                        "msg": "%msg%n"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+        <keepAliveDuration>5 minutes</keepAliveDuration>
+    </appender>
+
 
     <!-- ================================================================================= -->
     <!-- 根日志配置 -->
@@ -81,6 +109,8 @@
 
         <!-- 生产环境请将stdout去掉 -->
         <appender-ref ref="STDOUT"/>
+        <!-- logstash -->
+        <appender-ref ref="logstash"/>
     </root>
 
 </configuration>

@@ -19,3 +19,4 @@
 4validation：支持aop表达式来匹配需要validation功能的类，以取代spring默认针对@Validated标注的类启用validation功能；
 具体见MethodValidationMatchExpressPostProcessor类
 5aop：aop功能简单使用RequestLogInterceptor
+6logstash日志支持：作为ELK日志实时解析系统的日志输出端，采用logstash-logback-encoder jar包来把日志转换成json格式，传输给logstash服务
