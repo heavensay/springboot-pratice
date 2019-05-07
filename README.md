@@ -20,3 +20,4 @@
 具体见MethodValidationMatchExpressPostProcessor类
 5aop：aop功能简单使用RequestLogInterceptor
 6logstash日志支持：作为ELK日志实时解析系统的日志输出端，采用logstash-logback-encoder jar包来把日志转换成json格式，传输给logstash服务
+7增加了缓存功能cache caffeine，访问http://127.0.0.1:8080/spt/hello/getCache1?key=a，http://127.0.0.1:8080/spt/hello/getCache2?key=b
